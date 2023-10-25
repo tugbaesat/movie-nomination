@@ -14,7 +14,7 @@ const SearchedMovieItem = ({ movies, onNominateClick }) => {
   return (
     <div>
       {filteredMovies.map((movie) => {
-        if (movie.Type == "movie") {
+        if (movie.Type == "movie" && movie.Poster !== "N/A") {
           const isSelected = selectedMovies.includes(movie.imdbID);
           return (
             <li
@@ -27,15 +27,17 @@ const SearchedMovieItem = ({ movies, onNominateClick }) => {
               </div>
               <div className="grid content-center">
                 <button
-                  className={`px-4 py-2 font-bold text-white border-b-4 rounded border-cyan-700  ${
+                  className={`w-full relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium rounded-lg  ${
                     isSelected
                       ? "bg-gray-300 cursor-not-allowed"
-                      : "hover:bg-sky-300 hover:border-cyan-800 bg-sky-200"
+                      : "group bg-gradient-to-br from-red-500 to-orange-400 group-hover:from-red-500 group-hover:to-orange-400 hover:text-white"
                   }`}
                   onClick={() => handleNominateClick(movie)}
                   disabled={isSelected}
                 >
+                             <span className="w-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-slate-200 bg-opacity-50 text-gray-100 rounded-md group-hover:bg-opacity-0">
                   Nominate
+                </span>
                 </button>
               </div>
             </li>

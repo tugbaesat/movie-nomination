@@ -4,11 +4,24 @@ import SearchMovie from "./SearchMovie";
 import SearchedMoviesList from "./SearchedMoviesList";
 import NominatedMoviesList from "./NominatedMoviesList";
 import Intro from "./Intro";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState([]);
   const [nominatedMovies, setNominatedMovies] = useState([]);
+  const notify = () =>
+    toast.error("You have reached the maximum number of nominated movies!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
 
   const fetchMovieData = async (searchTerm) => {
     const API_URL = `http://www.omdbapi.com/?s=${searchTerm}&apikey=702528a6`;
@@ -36,20 +49,35 @@ const App = () => {
   };
 
   const onNominateClick = async (movie) => {
-    setNominatedMovies((prevNominatedMovies) => [
-      ...prevNominatedMovies,
-      movie,
-    ]);
+    if (nominatedMovies.length < 5) {
+      setNominatedMovies((prevNominatedMovies) => [
+        ...prevNominatedMovies,
+        movie,
+      ]);
+      const detailedMovie = await fetchMovieIMDBData(movie);
+      setNominatedMovies((prevNominatedMovies) => {
+        const updatedNominatedMovies = prevNominatedMovies.map(
+          (nominatedMovie) =>
+            nominatedMovie.imdbID === movie.imdbID
+              ? { ...nominatedMovie, detailedMovie }
+              : nominatedMovie
+        );
+        return updatedNominatedMovies;
+      });
+    } else {
+      notify();
+    }
+  };
 
-    const detailedMovie = await fetchMovieIMDBData(movie);
-    setNominatedMovies((prevNominatedMovies) => {
-      const updatedNominatedMovies = prevNominatedMovies.map((nominatedMovie) =>
-        nominatedMovie.imdbID === movie.imdbID
-          ? { ...nominatedMovie, detailedMovie }
-          : nominatedMovie
-      );
-      return updatedNominatedMovies;
-    });
+  const onRemoveClick = (movieID) => {
+    const newMovieList = nominatedMovies.filter(
+      (movie) => movie.imdbID !== movieID
+    );
+    if (newMovieList.length > 0) {
+      setNominatedMovies(newMovieList);
+    } else {
+      setNominatedMovies([]);
+    }
   };
 
   useEffect(() => {
@@ -71,7 +99,7 @@ const App = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
-      <div className="flex flex-col gap-6 bg-[#c79f27] text-white py-24 px-8">
+      <div className="flex flex-col gap-6 bg-[#c79f27] text-white py-12 px-8">
         <Intro />
         <SearchMovie
           searchTerm={searchTerm}
@@ -85,8 +113,25 @@ const App = () => {
           />
         ) : null}
       </div>
-      <div className="bg-slate-100 text-[#c79f27] pt-24 px-8">
-        <NominatedMoviesList nominatedMovies={nominatedMovies} />
+      <div className="bg-slate-100 text-[#c79f27] pt-12 px-8">
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        {/* Same as */}
+        <ToastContainer />
+        <NominatedMoviesList
+          nominatedMovies={nominatedMovies}
+          onRemoveClick={onRemoveClick}
+        />
       </div>
     </div>
   );
