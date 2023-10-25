@@ -24,7 +24,7 @@ const App = () => {
     });
 
   const fetchMovieData = async (searchTerm) => {
-    const API_URL = `http://www.omdbapi.com/?s=${searchTerm}&apikey=702528a6`;
+    const API_URL = `https://www.omdbapi.com/?s=${searchTerm}&apikey=702528a6`;
     const response = await fetch(API_URL);
     const data = await response.json();
     const search = data.Search;
@@ -37,7 +37,7 @@ const App = () => {
   }, [searchTerm]);
 
   const fetchMovieIMDBData = async (movie) => {
-    const API_URL = `http://www.omdbapi.com/?i=${movie.imdbID}&apikey=702528a6`;
+    const API_URL = `https://www.omdbapi.com/?i=${movie.imdbID}&apikey=702528a6`;
     const response = await fetch(API_URL);
     const data = await response.json();
     return data;
@@ -128,10 +128,12 @@ const App = () => {
         />
         {/* Same as */}
         <ToastContainer />
-        <NominatedMoviesList
-          nominatedMovies={nominatedMovies}
-          onRemoveClick={onRemoveClick}
-        />
+        {nominatedMovies.length > 0 ? (
+          <NominatedMoviesList
+            nominatedMovies={nominatedMovies}
+            onRemoveClick={onRemoveClick}
+          />
+        ) : null}
       </div>
     </div>
   );
