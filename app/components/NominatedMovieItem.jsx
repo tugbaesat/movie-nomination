@@ -12,9 +12,9 @@ const NominatedMovieItem = ({ nominatedMovies, onRemoveClick }) => {
         return (
           <li
             key={movie.imdbID}
-            className="flex flex-col md:flex-row items-center justify-between m-4 bg-white rounded-lg shadow md:max-w-xl text-xs md:text-sm  hover:bg-gray-100"
+            className="flex flex-col md:flex-row items-center justify-between m-4 bg-white rounded-lg shadow md:max-w-xl text-xs md:text-sm hover:bg-gray-100"
           >
-            <div className="object-cover w-full flex items-center justify-center rounded-t-lg md:h-auto md:w-48 ">
+            <div className="object-cover w-full flex items-center justify-center rounded-t-lg md:h-auto md:w-32 ">
               <Image
                 className="md:rounded-l-lg"
                 src={movie.Poster}
@@ -23,39 +23,34 @@ const NominatedMovieItem = ({ nominatedMovies, onRemoveClick }) => {
                 height={300}
               />
             </div>
-            <div className="flex flex-col justify-between md:pl-4 pt-4 px-1 my-4 leading-normal text-[#c79f27]">
-              {movie.detailedMovie && (
+            {movie.detailedMovie && (
+              <div className="flex flex-col justify-between md:pl-4 pt-4 px-1 my-4 leading-normal text-[#c79f27]">
                 <h3 className="mt-0 font-bold tracing-tight text-center md:text-left">
                   {movie.detailedMovie.Title}
                 </h3>
-              )}
-              {movie.detailedMovie && (
+
                 <p className="hidden md:inline-block text-gray-500 text-xs">
                   {movie.detailedMovie.Genre}
                 </p>
-              )}
-              <br />
-              {movie.detailedMovie && (
+
+                <br />
+
                 <p className="hidden md:inline-block  text-gray-500 text-xs">
                   Release Date: {movie.detailedMovie.Released}
                 </p>
-              )}
-              {movie.detailedMovie && (
+
                 <p className="hidden md:inline-block  text-gray-500 text-xs">
                   Runtime: {movie.detailedMovie.Runtime}
                 </p>
-              )}
-              {movie.detailedMovie && (
                 <p className="hidden md:inline-block  text-gray-500 text-xs">
                   IMDB Rating: {movie.detailedMovie.imdbRating}/10.0
                 </p>
-              )}
-              {movie.detailedMovie && (
+
                 <p className="hidden md:inline-block  text-gray-500 text-xs">
                   Awards: {movie.detailedMovie.Awards}
                 </p>
-              )}
-            </div>
+              </div>
+            )}
             <div className="w-full md:w-fit">
               <button
                 onClick={() => handleRemoveClick(movie.imdbID)}

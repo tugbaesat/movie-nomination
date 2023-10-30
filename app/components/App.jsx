@@ -6,11 +6,13 @@ import NominatedMoviesList from "./NominatedMoviesList";
 import Intro from "./Intro";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import WinnerMovieButton from "./WinnerMovieButton";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState([]);
   const [nominatedMovies, setNominatedMovies] = useState([]);
+
   const notify = () =>
     toast.error("You have reached the maximum number of nominated movies!", {
       position: "top-right",
@@ -80,7 +82,9 @@ const App = () => {
           setSearchTerm={setSearchTerm}
           onSearchMovie={onSearchMovie}
         />
-        {searchTerm && movies.length > 0 ? (
+        {nominatedMovies.length === 5 ? (
+          <WinnerMovieButton nominatedMovies={nominatedMovies} />
+        ) : searchTerm && movies.length > 0 ? (
           <SearchedMoviesList
             movies={movies}
             onNominateClick={onNominateClick}
