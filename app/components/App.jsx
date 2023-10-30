@@ -58,6 +58,7 @@ const App = () => {
           ...prevNominatedMovies,
           { ...movie, detailedMovie },
         ]);
+        setSearchTerm("");
       } else {
         notify();
       }
