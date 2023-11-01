@@ -56,7 +56,7 @@ const NominatedMovieItem = ({ nominatedMovies, onRemoveClick }) => {
 
             <button
               onClick={() => handleRemoveClick(movie.imdbID)}
-              className="relative text-white text-sm p-2 m-2 font-medium rounded-full bg-gradient-to-br from-red-500 to-red-400  hover:from-red-500 hover:to-red-500 "
+              className="flex items-center justify-center text-white text-sm p-2 m-2 font-medium rounded-full bg-gradient-to-br from-red-500 to-red-400  hover:from-red-500 hover:to-red-500 "
               style={{
                 width: "30px",
                 height: "30px",
@@ -64,7 +64,7 @@ const NominatedMovieItem = ({ nominatedMovies, onRemoveClick }) => {
                 transition: "background-color 0.3s",
               }}
             >
-              <span className="">x</span>
+              <span>x</span>
             </button>
           </li>
         );
