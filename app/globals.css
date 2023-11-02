@@ -2,3 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
+.winner-bg {
+  background-image: url("../public/images/oscars-bg.jpg");
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.nominated-bg {
+  background-image: url("../public/images/oscar-logo.jpg");
+  background-size: cover; /* Adjust the size as needed */
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.image-gallery {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.image-item {
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.image-item.middle {
+  position: relative;
+  z-index: 5;
+  height: 150px;
+  width: 105px;
+  opacity: 1;
+}
+
+.image-item.second {
+  z-index: 4;
+  position: relative;
+  width: 86px;
+  height: 128px;
+  left: 40px;
+  filter: blur(1px);
+}
+.image-item.forth {
+  z-index: 4;
+  position: relative;
+  width: 86px;
+  height: 128px;
+  right: 40px;
+  filter: blur(1px);
+}
+.image-item.first {
+  z-index: 3;
+  position: relative;
+  left: 80px;
+  height: 101px;
+  width: 68px;
+  filter: blur(2px);
+}
+.image-item.fifth {
+  z-index: 3;
+  position: relative;
+  height: 101px;
+  width: 68px;
+  right: 80px;
+  filter: blur(2px);
+}

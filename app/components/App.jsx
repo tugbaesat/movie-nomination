@@ -4,26 +4,29 @@ import SearchMovie from "./SearchMovie";
 import SearchedMoviesList from "./SearchedMoviesList";
 import NominatedMoviesList from "./NominatedMoviesList";
 import Intro from "./Intro";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import WinnerMovieButton from "./WinnerMovieButton";
+import "../globals.css";
+import WinnerMovieReveal from "./WinnerMovieReveal";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState([]);
   const [nominatedMovies, setNominatedMovies] = useState([]);
+  const [winnerMovie, setWinnerMovie] = useState(null);
 
-  const notify = () =>
-    toast.error("You have reached the maximum number of nominated movies!", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+  // const notify = () =>
+  //   toast.error("You have reached the maximum number of nominated movies!", {
+  //     position: "top-right",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "light",
+  //   });
 
   useEffect(() => {
     fetchMovieData(searchTerm);
@@ -52,15 +55,17 @@ const App = () => {
 
   const onNominateClick = async (movie) => {
     try {
-      if (nominatedMovies.length < 5) {
+      const isNominated = nominatedMovies.some(
+        (nominatedMovie) => nominatedMovie.imdbID === movie.imdbID
+      );
+
+      if (!isNominated && nominatedMovies.length < 5) {
         const detailedMovie = await fetchMovieIMDBData(movie);
         setNominatedMovies((prevNominatedMovies) => [
           ...prevNominatedMovies,
           { ...movie, detailedMovie },
         ]);
         setSearchTerm("");
-      } else {
-        notify();
       }
     } catch (error) {
       console.error("Error fetching or adding the movie:", error);
@@ -74,26 +79,46 @@ const App = () => {
     setNominatedMovies(newMovieList);
   };
 
+  const onRestart = () => {
+    setNominatedMovies([]);
+    setSearchTerm("");
+  };
+
+  const handleWinnerMovie = () => {
+    const randomIndex = Math.floor(Math.random() * nominatedMovies.length);
+    const movie = nominatedMovies[randomIndex];
+    setWinnerMovie(movie);
+  };
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
-      <div className="flex flex-col gap-6 bg-[#c79f27] text-white py-12 px-8">
-        <Intro />
-        <SearchMovie
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          onSearchMovie={onSearchMovie}
-        />
-        {nominatedMovies.length === 5 ? (
-          <WinnerMovieButton nominatedMovies={nominatedMovies} />
-        ) : searchTerm && movies.length > 0 ? (
-          <SearchedMoviesList
-            movies={movies}
-            onNominateClick={onNominateClick}
+    <div className="h-screen bg-black">
+      {winnerMovie ? (
+        <div className="h-screen winner-bg">
+          <WinnerMovieReveal
+            nominatedMovies={nominatedMovies}
+            onRestart={onRestart}
           />
-        ) : null}
-      </div>
-      <div className="bg-slate-100 text-[#c79f27] pt-12 px-8">
-        <ToastContainer
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 h-screen bg-black">
+          <div className="flex flex-col gap-6 text-[#c79f27] py-12 px-8 h-auto bg-black">
+            <Intro />
+            <SearchMovie
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              onSearchMovie={onSearchMovie}
+            />
+            {nominatedMovies.length === 5 ? (
+              <WinnerMovieButton handleWinnerMovie={handleWinnerMovie} />
+            ) : searchTerm && movies.length > 0 ? (
+              <SearchedMoviesList
+                movies={movies}
+                onNominateClick={onNominateClick}
+              />
+            ) : null}
+          </div>
+          <div className=" text-[#c79f27] pt-12 px-8 nominated-bg h-auto">
+            {/* <ToastContainer
           position="top-right"
           autoClose={5000}
           hideProgressBar={false}
@@ -104,16 +129,18 @@ const App = () => {
           draggable
           pauseOnHover
           theme="light"
-        />
-        {/* Same as */}
-        <ToastContainer />
-        {nominatedMovies.length > 0 ? (
-          <NominatedMoviesList
-            nominatedMovies={nominatedMovies}
-            onRemoveClick={onRemoveClick}
-          />
-        ) : null}
-      </div>
+        /> */}
+            {/* Same as */}
+            {/* <ToastContainer /> */}
+            {nominatedMovies.length > 0 ? (
+              <NominatedMoviesList
+                nominatedMovies={nominatedMovies}
+                onRemoveClick={onRemoveClick}
+              />
+            ) : null}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
