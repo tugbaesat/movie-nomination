@@ -9,6 +9,9 @@ import Intro from "./Intro";
 import WinnerMovieButton from "./WinnerMovieButton";
 import "../globals.css";
 import WinnerMovieReveal from "./WinnerMovieReveal";
+import Image from "next/image";
+import oscars from "../../public/images/oscar-logo.jpg";
+
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -82,6 +85,7 @@ const App = () => {
   const onRestart = () => {
     setNominatedMovies([]);
     setSearchTerm("");
+    setWinnerMovie("");
   };
 
   const handleWinnerMovie = () => {
@@ -91,17 +95,17 @@ const App = () => {
   };
 
   return (
-    <div className="h-screen bg-black">
+    <div className=" bg-black">
       {winnerMovie ? (
-        <div className="h-screen winner-bg">
+        <div className="h-screen oscars-bg ">
           <WinnerMovieReveal
             nominatedMovies={nominatedMovies}
             onRestart={onRestart}
           />
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 h-screen bg-black">
-          <div className="flex flex-col gap-6 text-[#c79f27] py-12 px-8 h-auto bg-black">
+        <div className="grid grid-cols-1 lg:grid-cols-2 bg-black h-screen">
+          <div className="flex flex-col gap-6 text-[#c79f27] py-12 px-8  bg-black ">
             <Intro />
             <SearchMovie
               searchTerm={searchTerm}
@@ -117,7 +121,7 @@ const App = () => {
               />
             ) : null}
           </div>
-          <div className=" text-[#c79f27] pt-12 px-8 nominated-bg h-auto">
+          <div className=" text-[#c79f27] pt-12 px-8 bg-black ">
             {/* <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -137,7 +141,14 @@ const App = () => {
                 nominatedMovies={nominatedMovies}
                 onRemoveClick={onRemoveClick}
               />
-            ) : null}
+            ) :
+            <div className="flex justify-center items-center h-screen"><Image
+            className=""
+            src={oscars}
+            alt="movie poster"
+            width={700}
+            height={900}
+          /></div> }
           </div>
         </div>
       )}

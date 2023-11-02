@@ -17,8 +17,8 @@ const WinnerMovieReveal = ({ nominatedMovies, onRestart }) => {
   const winnerMovie = shuffledImages[2];
 
   return (
-    <section className="flex flex-col items-center justify-center rounded-lg text-xs md:text-sm h-screen ">
-      <h2 className="text-[#c79f27]">The Winner</h2>
+    <section className="flex flex-col items-center justify-center rounded-lg text-xs md:text-sm h-screen gap-6">
+      <h2 className="text-[#c79f27] text-6xl">And the Oscar goes to...</h2>
       <div className="image-gallery">
         <Image
           src={shuffledImages[0].Poster}
@@ -65,8 +65,8 @@ const WinnerMovieReveal = ({ nominatedMovies, onRestart }) => {
               height={300}
             />
           </div> */}
-      <div className="flex flex-col justify-between md:pl-4 pt-4 px-1 my-4 leading-normal text-[#c79f27]">
-        <h3 className="mt-0 font-bold tracing-tight text-center md:text-left">
+      <div className="flex flex-col justify-between md:pl-4 pt-4 px-1 leading-normal text-[#c79f27]">
+        <h3 className="mt-0 font-bold tracing-tight text-center md:text-left text-3xl">
           {winnerMovie.Title}
         </h3>
       </div>
@@ -75,7 +75,7 @@ const WinnerMovieReveal = ({ nominatedMovies, onRestart }) => {
           className=" flex items-center justify-center p-0.5 m-4 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-black to-[#c79f27] group-hover:from-black group-hover:to-[#daab20] hover:text-white"
           onClick={onRestart}
         >
-          <span className="w-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-slate-200 bg-opacity-0 text-gray-100 rounded-md">
+          <span className="w-full relative px-6 py-2 text-[#f8e19d] rounded-md text-base uppercase ">
             Restart
           </span>
         </button>

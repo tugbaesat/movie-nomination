@@ -4,16 +4,22 @@
 
 .winner-bg {
   background-image: url("../public/images/oscars-bg.jpg");
-  background-size:contain;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
 }
 
 .nominated-bg {
   background-image: url("../public/images/oscar-logo.jpg");
-  background-size: cover; /* Adjust the size as needed */
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
+}
+.oscars-bg {
+  background-image: url("../public/images/winner-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
 }
 
 .image-gallery {
@@ -31,40 +37,43 @@
 .image-item.middle {
   position: relative;
   z-index: 5;
-  height: 150px;
-  width: 105px;
+  height: 200px; /* Increase the height to 200px */
+  width: 140px; /* Increase the width to 140px */
   opacity: 1;
 }
 
 .image-item.second {
   z-index: 4;
   position: relative;
-  width: 86px;
-  height: 128px;
+  width: 115px; /* Increase the width to 115px */
+  height: 172px; /* Increase the height to 172px */
   left: 40px;
   filter: blur(1px);
 }
+
 .image-item.forth {
   z-index: 4;
   position: relative;
-  width: 86px;
-  height: 128px;
+  width: 115px; /* Increase the width to 115px */
+  height: 172px; /* Increase the height to 172px */
   right: 40px;
   filter: blur(1px);
 }
+
 .image-item.first {
   z-index: 3;
   position: relative;
   left: 80px;
-  height: 101px;
-  width: 68px;
+  height: 130px; /* Increase the height to 130px */
+  width: 88px; /* Increase the width to 88px */
   filter: blur(2px);
 }
+
 .image-item.fifth {
   z-index: 3;
   position: relative;
-  height: 101px;
-  width: 68px;
+  height: 130px; /* Increase the height to 130px */
+  width: 88px; /* Increase the width to 88px */
   right: 80px;
   filter: blur(2px);
 }

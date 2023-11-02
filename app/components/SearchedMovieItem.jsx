@@ -35,7 +35,7 @@ const SearchedMovieItem = ({ movies, onNominateClick }) => {
                   onClick={() => handleNominateClick(movie)}
                   disabled={isSelected}
                 >
-                             <span className="w-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-slate-200 bg-opacity-0 text-gray-100 rounded-md">
+                             <span className="w-full relative px-6 py-2 text-[#f8e19d] rounded-md text-xs uppercase">
                   Nominate
                 </span>
                 </button>
