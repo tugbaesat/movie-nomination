@@ -1,34 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Movie Nomination App
 
-## Getting Started
+## About the Project: 📚
 
-First, run the development server:
+This is a webpage that can search OMDB for movies, and allow the user to save their favorite films they feel should be up for nomination. When they've selected 5 nominees they should be notified they're finished. This is a [Next.js](https://nextjs.org/) project. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Live Demo of the Project: 📹
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[Movie Project Website](https://movie-nomination.vercel.app)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Features: 📖
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- The ability to search the OMDB API and return a list of movies that show at least the title, release year, and a button to nominate them.
+- Search results are only movies.
+- Updates to the search terms updates the result list.
+- If a movie has been nominated already, its nominate button is disabled.
+- Movies in the nomination list are able to be removed.
 
-## Learn More
+## Technologies, Frameworks and Libraries: ☕️ 🐍 ⚛️
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
-To learn more about Next.js, take a look at the following resources:
+## Screenshots: 📷
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![image](/public/design/main-page.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+![image](/public/design/search.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![image](/public/design/reveal.png)
+
+
+![image](/public/design/winner.png)
+
+
+## Authors: 💻
+[@tugbaesat](https://github.com/tugbaesat)
